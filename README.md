@@ -62,7 +62,7 @@ Lazy.nvim config:
 
 ## ⤴️ Available Functions
 
-Go-up provides the following functions that you can use in mappings.
+Go-up provides the following functions that you can use.
 
 | Function                          | Description                                                                                       |
 | --------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -86,7 +86,7 @@ Go-up provides the following functions that you can use in mappings.
 | ------- | --------- | ------- | --------------------------------------------------- |
 | `mapZZ` | boolean   | `true`  | Whether or not to affect the default `zz` behavior. |
 
-## 🔼 Other Tips
+## 📈 Other Tips
 
 I like to center the screen with <kbd>Space</kbd>, so I use this mapping:
 
@@ -97,7 +97,7 @@ vim.keymap.set({ 'n', 'v' }, '<space>', function()
 end, { desc = 'center the screen' })
 ```
 
-## 🔺 License, Contributing, etc.
+## 🔼 License, Contributing, etc.
 
 See [LICENSE](./LICENSE) and [CONTRIBUTING.md](./CONTRIBUTING.md).
 
