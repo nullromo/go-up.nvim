@@ -5,7 +5,43 @@ Now you don't have to.
 
 ## ⬆️ Overview
 
-This plugin TODO
+This plugin adds virtual lines _above_ line 1 of your buffers, allowing you to
+scroll upwards beyond line 1.
+
+### Motivation 1: Consistency
+
+Vim allows you to scroll _downward_ until the _last_ line of your file is at the
+_top_ of your window, and it allows you to scroll _upward_ until the _first_
+line of your file is at the... **TOP** of your window!? Wait a minute, that
+doesn't seem right. This plugin fixes that behavior and causes scrolling up and
+down to behave the same, giving you a more consistent experience.
+
+### Motivation 2: Searching
+
+Many people like to have a mapping set such that vim centers the screen after
+jumping to each search match. This is useful because as you press
+<kbd>n</kbd><kbd>n</kbd><kbd>n</kbd>... you don't need to move your eyes around
+the screen. Each new match is showing up right in the middle.
+
+That's great, except when your match occurs in the first few lines of the file,
+vim is unable to center the screen on that line!
+
+This plugin fixes that behavior and allows vim to center the screen by scrolling
+beyond where it would normally have scrolled. That way, every time you
+center-after-search, the match will be right in the middle of the window.
+
+### Motivation 3: Moving Things Down
+
+Sometimes you just have a tall monitor and you're working on a 10-line file.
+It's great having a tall monitor for instances when you want to look at a large
+amount of context, but it's annoying that this 10-line file is crammed up at the
+top of the screen. This plugin fixes that behavior by allowing you to simply
+scroll until the content is positioned where you want it on the screen.
+
+_This kind of issue comes up often in webpage design. Back in the early days,
+most websites were just left-justified, leaving a large amount of blank space on
+the right hand side of the screen. Nowadays, many websites center their content
+and leave the blank space on both sides, rather than all on the right._
 
 ## 👆 How to Install
 
