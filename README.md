@@ -44,8 +44,9 @@ I am very open to feedback and criticism.
 
 ## ☝ Special Thanks
 
-### Sponsors
+### Bronze Tier Sponsors
 
+-   🥉 [collindutter](https://github.com/collindutter)
 -   🏅
     [`<Your name here>`](https://github.com/nullromo/go-up.nvim/blob/main/README.md#-donating)
 
