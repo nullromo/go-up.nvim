@@ -3,9 +3,9 @@
 "Go up" is what you used to have to say when vim wouldn't scroll up past line 1.
 Now you don't have to.
 
-## ⬆️ Overview
+## ⬆️ Video Demo
 
-This plugin TODO
+https://github.com/user-attachments/assets/31ae6af2-c4e1-4a6a-8125-9043ba9e8c3b
 
 ## 👆 How to Install
 
