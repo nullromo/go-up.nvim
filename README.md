@@ -60,13 +60,14 @@ Lazy.nvim config:
 }
 ```
 
-## ⏫ Compatibility Issues / Warnings
+## ⤴️ Available Functions
 
-TODO
+Go-up provides the following functions that you can use in mappings.
 
-## ⤴️ How to Use
-
-TODO
+| Function                          | Description                                                                                       |
+| --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `require('go-up').setup()`        | Sets up the plugin.                                                                               |
+| `require('go-up').centerScreen()` | Centers the current line in the middle of the window. Equivalent to the default function of `zz`. |
 
 ## 🔝 Customization
 
@@ -88,7 +89,7 @@ I am very open to feedback and criticism.
 -   🏅
     [`<Your name here>`](https://github.com/nullromo/go-up.nvim/blob/main/README.md#-donating)
 
-## 🗻 Donating
+## ⏫ Donating
 
 To say thanks, [sponsor me on GitHub](https://github.com/sponsors/nullromo) or
 use [@Kyle-Kovacs on Venmo](https://venmo.com/u/Kyle-Kovacs). Your donation is

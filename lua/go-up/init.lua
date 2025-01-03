@@ -11,31 +11,11 @@ goUpModule.setup = function(opts)
     goUpInternals.setUpAutocommands()
 
     -- set up keymaps
-    goUpInternals.setUpKeymaps(goUpModule)
+    goUpInternals.setUpKeymaps()
 end
 
--- centers the screen normally, then adjusts so that the current line is
--- actually centered
-goUpModule.centerScreen = function()
-    -- center the screen first, then adjust
-    vim.cmd('normal! zz')
-
-    -- get the line the cursor is on
-    local currentLine = vim.fn.line('.')
-
-    -- get information about the current window
-    local wininfo = vim.fn.getwininfo(vim.fn.win_getid())[1]
-    local halfHeight = math.floor(wininfo.height / 2)
-    local targetTopLine = currentLine - halfHeight
-    local offset = wininfo.topline - targetTopLine
-
-    -- scroll accordingly
-    if offset > 0 then
-        vim.cmd('execute "normal ' .. math.abs(offset) .. '"')
-    else
-        vim.cmd('execute "normal ' .. math.abs(offset) .. '"')
-    end
-end
+-- public functions
+goUpModule.centerScreen = goUpInternals.centerScreen
 
 -- export module
 return goUpModule
