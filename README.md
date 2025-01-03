@@ -71,9 +71,31 @@ Go-up provides the following functions that you can use in mappings.
 
 ## 🔝 Customization
 
-TODO
+### Default Options
+
+```lua
+{
+    -- affect the behavior of zz
+    mapZZ = true,
+}
+```
+
+### Options Table
+
+| Option  | Data Type | Default | Description                                         |
+| ------- | --------- | ------- | --------------------------------------------------- |
+| `mapZZ` | boolean   | `true`  | Whether or not to affect the default `zz` behavior. |
 
 ## 🔼 Other Tips
+
+I like to center the screen with <kbd>Space</kbd>, so I use this mapping:
+
+```lua
+-- Use space to center the screen
+vim.keymap.set({ 'n', 'v' }, '<space>', function()
+    require('go-up').centerScreen()
+end, { desc = 'center the screen' })
+```
 
 ## 🔺 License, Contributing, etc.
 

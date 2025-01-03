@@ -48,10 +48,12 @@ goUpInternals.centerScreen = function()
 end
 
 goUpInternals.setUpKeymaps = function()
-    -- adjust when using zz to center the screen
-    vim.keymap.set('n', 'zz', function()
-        goUpInternals.centerScreen()
-    end, { desc = 'go-up screen center' })
+    if goUpInternals.opts.mapZZ then
+        -- adjust the scroll result when using zz to center the screen
+        vim.keymap.set('n', 'zz', function()
+            goUpInternals.centerScreen()
+        end, { desc = 'go-up screen center' })
+    end
 end
 
 return goUpInternals

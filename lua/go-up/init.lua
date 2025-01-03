@@ -1,4 +1,5 @@
 local goUpInternals = require('go-up.internals')
+local options = require('go-up.options')
 
 local goUpModule = {}
 
@@ -6,6 +7,18 @@ local goUpModule = {}
 goUpModule.setup = function(opts)
     -- make sure options is not nil
     opts = opts or {}
+
+    -- set default options if not already set
+    if opts.mapZZ == nil then
+        opts.mapZZ = options.defaultOptions.mapZZ
+    end
+
+    -- validate options
+    options.validateOptions(opts)
+
+    -- set options
+    goUpInternals.opts = opts
+    goUpModule.opts = opts
 
     -- set up autocommands
     goUpInternals.setUpAutocommands()
