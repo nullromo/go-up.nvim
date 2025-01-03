@@ -1,5 +1,5 @@
 local goUpModule = require('go-up.go-up')
-local keymaps = require('keymaps')
+local keymaps = require('go-up.keymaps')
 
 -- main setup function for Go-Up.nvim
 goUpModule.setup = function(opts)
