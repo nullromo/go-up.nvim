@@ -40,10 +40,12 @@ goUpInternals.centerScreen = function()
     local offset = wininfo.topline - targetTopLine
 
     -- scroll accordingly
-    if offset > 0 then
-        vim.cmd('execute "normal ' .. math.abs(offset) .. '"')
+    if offset == 0 then
+        return
+    elseif offset > 0 then
+        vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
     else
-        vim.cmd('execute "normal ' .. math.abs(offset) .. '"')
+        vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
     end
 end
 
