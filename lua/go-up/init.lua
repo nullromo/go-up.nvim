@@ -29,6 +29,7 @@ end
 
 -- public functions
 goUpModule.centerScreen = goUpInternals.centerScreen
+goUpModule.reset = goUpInternals.reset
 
 -- export module
 return goUpModule
