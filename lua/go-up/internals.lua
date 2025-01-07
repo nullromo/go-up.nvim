@@ -53,9 +53,9 @@ end
 -- the top
 goUpInternals.alignTop = function()
     local windowID = vim.fn.win_getid()
-    local windowScreenPositionRow = vim.fn.win_screenpos(windowID)[1]
-    local screenPositionRow = vim.fn.screenpos(windowID, 1, 1).row
-    local offset = screenPositionRow - windowScreenPositionRow
+    local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
+    local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
+    local offset = firstLineScreenPosition - windowScreenPosition
     if offset <= 0 then
         return
     end
@@ -66,15 +66,16 @@ end
 -- until the last line is at the bottom
 goUpInternals.alignBottom = function()
     local windowID = vim.fn.win_getid()
-    local windowScreenPositionRow = vim.fn.win_screenpos(windowID)[1]
+    local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
     local windowHeight = vim.fn.getwininfo(windowID)[1].height
     local lastLineNumber = vim.fn.line('$', windowID)
-    local screenPositionRow = vim.fn.screenpos(windowID, lastLineNumber, 1).row
-    local offset = windowScreenPositionRow
+    local lastLineScreenPosition =
+        vim.fn.screenpos(windowID, lastLineNumber, 1).row
+    local offset = windowScreenPosition
         + windowHeight
-        - screenPositionRow
+        - lastLineScreenPosition
         - 1
-    if screenPositionRow == 0 or offset <= 0 then
+    if lastLineScreenPosition == 0 or offset <= 0 then
         return
     end
     vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
