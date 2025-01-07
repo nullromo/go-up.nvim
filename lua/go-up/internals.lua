@@ -49,6 +49,37 @@ goUpInternals.centerScreen = function()
     end
 end
 
+-- if the file is below the top of the window, scrolls down until line 1 is at
+-- the top
+goUpInternals.alignTop = function()
+    local windowID = vim.fn.win_getid()
+    local windowScreenPositionRow = vim.fn.win_screenpos(windowID)[1]
+    local screenPositionRow = vim.fn.screenpos(windowID, 1, 1).row
+    local offset = screenPositionRow - windowScreenPositionRow
+    if offset <= 0 then
+        return
+    end
+    vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
+end
+
+-- if the last line of the file is above the bottom of the window, scrolls up
+-- until the last line is at the bottom
+goUpInternals.alignBottom = function()
+    local windowID = vim.fn.win_getid()
+    local windowScreenPositionRow = vim.fn.win_screenpos(windowID)[1]
+    local windowHeight = vim.fn.getwininfo(windowID)[1].height
+    local lastLineNumber = vim.fn.line('$', windowID)
+    local screenPositionRow = vim.fn.screenpos(windowID, lastLineNumber, 1).row
+    local offset = windowScreenPositionRow
+        + windowHeight
+        - screenPositionRow
+        - 1
+    if screenPositionRow == 0 or offset <= 0 then
+        return
+    end
+    vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
+end
+
 goUpInternals.setUpKeymaps = function()
     if goUpInternals.opts.mapZZ then
         -- adjust the scroll result when using zz to center the screen
@@ -67,6 +98,14 @@ end
 
 vim.api.nvim_create_user_command('GoUpReset', function()
     goUpInternals.reset()
-end, { desc = 'Reset Go-Up' })
+end, { desc = 'Go-Up reset function' })
+
+vim.api.nvim_create_user_command('GoUpAlignTop', function()
+    goUpInternals.alignTop()
+end, { desc = 'Go-Up align top function' })
+
+vim.api.nvim_create_user_command('GoUpAlignBottom', function()
+    goUpInternals.alignBottom()
+end, { desc = 'Go-Up align bottom function' })
 
 return goUpInternals
