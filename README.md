@@ -103,13 +103,13 @@ vim.keymap.set({ 'n', 'v' }, '<space>', function()
 end, { desc = 'center the screen' })
 ```
 
-I also like to align the screen with <kbd>Ctrl</kbd><kbd>Space</kbd>:
+I also like to align the screen with <kbd>Ctrl</kbd>-<kbd>Space</kbd>:
 
 ```lua
 -- Use <C-space> to align
 vim.keymap.set({ 'n', 'v' }, '<C-Space>', function()
-    goUp.align()
-end, { desc = 'align the top of the screen' })
+    require('go-up').align()
+end, { desc = 'align the screen' })
 ```
 
 ## 🔼 License, Contributing, etc.
