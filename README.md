@@ -62,12 +62,13 @@ Lazy.nvim config:
 
 ## ⤴️ Available Functions
 
-Go-up provides the following functions that you can use.
+Go-Up provides the following functions that you can use.
 
-| Function                          | Description                                                                                       |
-| --------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `require('go-up').setup()`        | Sets up the plugin.                                                                               |
-| `require('go-up').centerScreen()` | Centers the current line in the middle of the window. Equivalent to the default function of `zz`. |
+| Function                          | Description                                                                                                                     | User Command |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| `require('go-up').setup()`        | Sets up the plugin.                                                                                                             | N/A          |
+| `require('go-up').centerScreen()` | Centers the current line in the middle of the window. Equivalent to the default function of `zz`.                               | N/A          |
+| `require('go-up').reset()`        | Resets the plugin for the current buffer. Works by clearing all the extmarks in the Go-Up namespace, then re-initializing them. | `:GoUpReset` |
 
 ## 🔝 Customization
 

@@ -58,4 +58,15 @@ goUpInternals.setUpKeymaps = function()
     end
 end
 
+goUpInternals.reset = function()
+    -- clear all extmarks in the namespace for the current buffer
+    vim.api.nvim_buf_clear_namespace(0, goUpInternals.goUpNamespace, 0, -1)
+    -- reset the extmarks
+    goUpInternals.setUpExtmarks()
+end
+
+vim.api.nvim_create_user_command('GoUpReset', function()
+    goUpInternals.reset()
+end, { desc = 'Reset Go-Up' })
+
 return goUpInternals
