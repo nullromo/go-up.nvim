@@ -81,6 +81,20 @@ goUpInternals.alignBottom = function()
     vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
 end
 
+goUpInternals.align = function()
+    local windowID = vim.fn.win_getid()
+    local lastLineNumber = vim.fn.line('$', windowID)
+    local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
+    local lastLineScreenPosition =
+        vim.fn.screenpos(windowID, lastLineNumber, 1).row
+
+    if firstLineScreenPosition > 0 then
+        goUpInternals.alignTop()
+    elseif lastLineScreenPosition > 0 then
+        goUpInternals.alignBottom()
+    end
+end
+
 goUpInternals.setUpKeymaps = function()
     if goUpInternals.opts.mapZZ then
         -- adjust the scroll result when using zz to center the screen
@@ -108,5 +122,9 @@ end, { desc = 'Go-Up align top function' })
 vim.api.nvim_create_user_command('GoUpAlignBottom', function()
     goUpInternals.alignBottom()
 end, { desc = 'Go-Up align bottom function' })
+
+vim.api.nvim_create_user_command('GoUpAlign', function()
+    goUpInternals.align()
+end, { desc = 'Go-Up align function' })
 
 return goUpInternals

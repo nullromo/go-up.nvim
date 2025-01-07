@@ -32,6 +32,7 @@ goUpModule.centerScreen = goUpInternals.centerScreen
 goUpModule.reset = goUpInternals.reset
 goUpModule.alignTop = goUpInternals.alignTop
 goUpModule.alignBottom = goUpInternals.alignBottom
+goUpModule.align = goUpInternals.align
 
 -- export module
 return goUpModule

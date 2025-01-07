@@ -71,6 +71,7 @@ Go-Up provides the following functions that you can use.
 | `require('go-up').reset()`        | Resets the plugin for the current buffer. Works by clearing all the extmarks in the Go-Up namespace, then re-initializing them. | `:GoUpReset`       |
 | `require('go-up').alignTop()`     | If there are virtual lines at the top of the window, scrolls down until there aren't.                                           | `:GoUpAlignTop`    |
 | `require('go-up').alignBottom()`  | If there are virtual lines at the bottom of the window, scrolls up until there aren't.                                          | `:GoUpAlignBottom` |
+| `require('go-up').align()`        | Calls either alignTop or alignBottom, whichever is more appropriate.                                                            | `:GoUpAlign`       |
 
 ## 🔝 Customization
 
@@ -98,6 +99,15 @@ I like to center the screen with <kbd>Space</kbd>, so I use this mapping:
 vim.keymap.set({ 'n', 'v' }, '<space>', function()
     require('go-up').centerScreen()
 end, { desc = 'center the screen' })
+```
+
+I also like to align the screen with <kbd>Ctrl</kbd><kbd>Space</kbd>:
+
+```lua
+-- Use <C-space> to align
+vim.keymap.set({ 'n', 'v' }, '<C-Space>', function()
+    goUp.align()
+end, { desc = 'align the top of the screen' })
 ```
 
 ## 🔼 License, Contributing, etc.
