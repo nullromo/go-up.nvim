@@ -87,8 +87,9 @@ goUpInternals.align = function()
     local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
     local lastLineScreenPosition =
         vim.fn.screenpos(windowID, lastLineNumber, 1).row
+    local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
 
-    if firstLineScreenPosition > 0 then
+    if firstLineScreenPosition > windowScreenPosition then
         goUpInternals.alignTop()
     elseif lastLineScreenPosition > 0 then
         goUpInternals.alignBottom()
