@@ -85,6 +85,8 @@ Go-Up provides the following functions that you can use.
     mapZZ = true,
     -- respect splitkeep setting
     respectSplitkeep = false,
+    -- respect scrolloff setting
+    respectScrolloff = false,
 }
 ```
 
@@ -94,6 +96,7 @@ Go-Up provides the following functions that you can use.
 | ------------------ | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `mapZZ`            | boolean   | `true`  | Go-Up remaps `zz` by default. Set `mapZZ` to `false` to prevent this.                                                                                              |
 | `respectSplitkeep` | boolean   | `false` | Go-Up works best when `splitkeep` is set to `'topline'`, so it does that by default. Set `respectSplitkeep` to `true` to prevent Go-Up from modifying `splitkeep`. |
+| `respectScrolloff` | boolean   | `false` | Go-Up works best when `scrolloff` is set to `0`, so it does that by default. Set `respectScrolloff` to `true` to prevent Go-Up from modifying `scrolloff`.         |
 
 ## 📈 Other Tips
 

@@ -116,6 +116,9 @@ goUpInternals.modifySettings = function()
     if not goUpInternals.respectSplitkeep then
         vim.opt.splitkeep = 'topline'
     end
+    if not goUpInternals.respectScrolloff then
+        vim.opt.scrolloff = 0
+    end
 end
 
 vim.api.nvim_create_user_command('GoUpReset', function()

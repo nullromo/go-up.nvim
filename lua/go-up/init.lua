@@ -15,6 +15,9 @@ goUpModule.setup = function(opts)
     if opts.respectSplitkeep == nil then
         opts.respectSplitkeep = options.defaultOptions.respectSplitkeep
     end
+    if opts.respectScrolloff == nil then
+        opts.respectScrolloff = options.defaultOptions.respectScrolloff
+    end
 
     -- validate options
     options.validateOptions(opts)

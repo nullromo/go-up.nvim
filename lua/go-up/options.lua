@@ -11,6 +11,8 @@ options.defaultOptions = {
     mapZZ = true,
     -- respect splitkeep setting
     respectSplitkeep = false,
+    -- respect scrolloff setting
+    respectScrolloff = false,
 }
 
 options.validateOptions = function(opts)
@@ -19,6 +21,8 @@ options.validateOptions = function(opts)
             checkType(value, 'opts.mapZZ', 'boolean')
         elseif key == 'respectSplitkeep' then
             checkType(value, 'opts.respectSplitkeep', 'boolean')
+        elseif key == 'respectScrolloff' then
+            checkType(value, 'opts.respectScrolloff', 'boolean')
         else
             error('"opts.' .. key .. '" is not a valid option for Go-Up.nvim')
         end
