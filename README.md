@@ -8,7 +8,7 @@ Now you don't have to.
 This plugin adds virtual lines _above_ line 1 of your buffers, allowing you to
 scroll upwards beyond line 1.
 
-https://github.com/user-attachments/assets/31ae6af2-c4e1-4a6a-8125-9043ba9e8c3b
+https://github.com/user-attachments/assets/543a86d2-5ea2-4b5f-bf8c-22a3ad456850
 
 ### Motivation 1: Consistency
 
