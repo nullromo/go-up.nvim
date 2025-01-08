@@ -29,6 +29,13 @@ goUpInternals.setUpAutocommands = function()
         end,
         desc = 'set up extmarks for go-up',
     })
+    -- every time the text changes, make sure the virtual lines are not in the
+    -- middle of the text
+    vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
+        callback = function()
+            goUpInternals.reset()
+        end,
+    })
 end
 
 -- centers the screen normally, then adjusts so that the current line is
