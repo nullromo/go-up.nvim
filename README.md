@@ -92,11 +92,11 @@ Go-Up provides the following functions that you can use.
 
 ### Options Table
 
-| Option             | Data Type | Default | Description                                                                                                                                                        |
-| ------------------ | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `mapZZ`            | boolean   | `true`  | Go-Up remaps `zz` by default. Set `mapZZ` to `false` to prevent this.                                                                                              |
-| `respectSplitkeep` | boolean   | `false` | Go-Up works best when `splitkeep` is set to `'topline'`, so it does that by default. Set `respectSplitkeep` to `true` to prevent Go-Up from modifying `splitkeep`. |
-| `respectScrolloff` | boolean   | `false` | Go-Up works best when `scrolloff` is set to `0`, so it does that by default. Set `respectScrolloff` to `true` to prevent Go-Up from modifying `scrolloff`.         |
+| Option             | Data Type | Default | Description                                                                                                                                                                                                                         |
+| ------------------ | --------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mapZZ`            | boolean   | `true`  | Go-Up remaps `zz` by default. Set `mapZZ` to `false` to prevent this.                                                                                                                                                               |
+| `respectScrolloff` | boolean   | `false` | Go-Up works best when `scrolloff` is set to `0`[<sup>[1]</sup>](https://github.com/nullromo/go-up.nvim/issues/3), so it does that by default. Set `respectScrolloff` to `true` to prevent Go-Up from modifying `scrolloff`.         |
+| `respectSplitkeep` | boolean   | `false` | Go-Up works best when `splitkeep` is set to `'topline'`[<sup>[2]</sup>](https://github.com/nullromo/go-up.nvim/issues/4), so it does that by default. Set `respectSplitkeep` to `true` to prevent Go-Up from modifying `splitkeep`. |
 
 ## 📈 Other Tips
 
