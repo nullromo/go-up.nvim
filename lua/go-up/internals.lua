@@ -4,7 +4,7 @@ local goUpInternals = {}
 goUpInternals.goUpNamespace = vim.api.nvim_create_namespace('Go-UpNamespace')
 
 -- this function adds the extmarks to the current buffer
-goUpInternals.setUpExtmarks = function()
+local setUpExtmarks = function()
     for line = 1, 100 do
         vim.api.nvim_buf_set_extmark(0, goUpInternals.goUpNamespace, 0, 0, {
             id = line,
@@ -14,11 +14,18 @@ goUpInternals.setUpExtmarks = function()
     end
 end
 
+goUpInternals.reset = function()
+    -- clear all extmarks in the namespace for the current buffer
+    vim.api.nvim_buf_clear_namespace(0, goUpInternals.goUpNamespace, 0, -1)
+    -- reset the extmarks
+    setUpExtmarks()
+end
+
 goUpInternals.setUpAutocommands = function()
     -- every time a buffer is entered, make sure the extmarks are set up
     vim.api.nvim_create_autocmd('BufEnter', {
         callback = function()
-            goUpInternals.setUpExtmarks()
+            goUpInternals.reset()
         end,
         desc = 'set up extmarks for go-up',
     })
@@ -103,13 +110,6 @@ goUpInternals.setUpKeymaps = function()
             goUpInternals.centerScreen()
         end, { desc = 'go-up screen center' })
     end
-end
-
-goUpInternals.reset = function()
-    -- clear all extmarks in the namespace for the current buffer
-    vim.api.nvim_buf_clear_namespace(0, goUpInternals.goUpNamespace, 0, -1)
-    -- reset the extmarks
-    goUpInternals.setUpExtmarks()
 end
 
 goUpInternals.modifySettings = function()
