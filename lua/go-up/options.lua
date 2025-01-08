@@ -9,12 +9,16 @@ end
 options.defaultOptions = {
     -- affect the behavior of zz
     mapZZ = true,
+    -- respect splitkeep setting
+    respectSplitkeep = false,
 }
 
 options.validateOptions = function(opts)
     for key, value in pairs(opts) do
         if key == 'mapZZ' then
             checkType(value, 'opts.mapZZ', 'boolean')
+        elseif key == 'respectSplitkeep' then
+            checkType(value, 'opts.respectSplitkeep', 'boolean')
         else
             error('"opts.' .. key .. '" is not a valid option for Go-Up.nvim')
         end

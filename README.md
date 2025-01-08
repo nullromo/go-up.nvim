@@ -83,14 +83,17 @@ Go-Up provides the following functions that you can use.
 {
     -- affect the behavior of zz
     mapZZ = true,
+    -- respect splitkeep setting
+    respectSplitkeep = false,
 }
 ```
 
 ### Options Table
 
-| Option  | Data Type | Default | Description                                         |
-| ------- | --------- | ------- | --------------------------------------------------- |
-| `mapZZ` | boolean   | `true`  | Whether or not to affect the default `zz` behavior. |
+| Option             | Data Type | Default | Description                                                                                                                                                        |
+| ------------------ | --------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `mapZZ`            | boolean   | `true`  | Go-Up remaps `zz` by default. Set `mapZZ` to `false` to prevent this.                                                                                              |
+| `respectSplitkeep` | boolean   | `false` | Go-Up works best when `splitkeep` is set to `'topline'`, so it does that by default. Set `respectSplitkeep` to `true` to prevent Go-Up from modifying `splitkeep`. |
 
 ## 📈 Other Tips
 

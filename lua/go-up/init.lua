@@ -12,6 +12,9 @@ goUpModule.setup = function(opts)
     if opts.mapZZ == nil then
         opts.mapZZ = options.defaultOptions.mapZZ
     end
+    if opts.respectSplitkeep == nil then
+        opts.respectSplitkeep = options.defaultOptions.respectSplitkeep
+    end
 
     -- validate options
     options.validateOptions(opts)
@@ -19,6 +22,9 @@ goUpModule.setup = function(opts)
     -- set options
     goUpInternals.opts = opts
     goUpModule.opts = opts
+
+    -- modify settings
+    goUpInternals.modifySettings()
 
     -- set up autocommands
     goUpInternals.setUpAutocommands()

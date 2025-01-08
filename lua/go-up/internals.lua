@@ -112,6 +112,12 @@ goUpInternals.reset = function()
     goUpInternals.setUpExtmarks()
 end
 
+goUpInternals.modifySettings = function()
+    if not goUpInternals.respectSplitkeep then
+        vim.opt.splitkeep = 'topline'
+    end
+end
+
 vim.api.nvim_create_user_command('GoUpReset', function()
     goUpInternals.reset()
 end, { desc = 'Go-Up reset function' })
