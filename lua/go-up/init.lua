@@ -52,18 +52,15 @@ end
 
 -- main setup function for Go-Up.nvim
 M.setup = function(opts)
-    opts = vim.tbl_deep_extend("keep", opts or {}, options.defaultOptions)
+    M.opts = vim.tbl_deep_extend("keep", opts or {}, options.defaultOptions)
 
-    options.validateOptions(opts)
-
-    -- share options
-    M.opts = opts
+    options.validateOptions(M.opts)
 
     -- modify settings
     modifySettings()
 
     autocmd_setup()
-    if internals.opts.mapZZ then
+    if M.opts.mapZZ then
       keymaps_setup()
     end
     usercmds_setup()

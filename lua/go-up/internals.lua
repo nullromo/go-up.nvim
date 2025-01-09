@@ -8,10 +8,10 @@ M.redraw = function()
 
     -- loop makes every line a single extmark and not one big block
     for _ = 1, vim.api.nvim_win_get_height(0) do
-      vim.api.nvim_buf_set_extmark(0, ns, 0, 0, {
-        virt_lines = { { { '', 'NonText' } } },
-        virt_lines_above = true,
-      })
+        vim.api.nvim_buf_set_extmark(0, ns, 0, 0, {
+            virt_lines = { { { '', 'NonText' } } },
+            virt_lines_above = true,
+        })
     end
 end
 
