@@ -3,29 +3,23 @@ local goUpInternals = {}
 -- create a namespace for the extmarks for the virtual lines
 goUpInternals.goUpNamespace = vim.api.nvim_create_namespace('Go-UpNamespace')
 
--- this function adds the extmarks to the current buffer
-local setUpExtmarks = function()
-    for line = 1, 100 do
-        vim.api.nvim_buf_set_extmark(0, goUpInternals.goUpNamespace, 0, 0, {
-            id = line,
-            virt_lines = { { { '', 'NonText' } } },
-            virt_lines_above = true,
-        })
-    end
-end
-
-goUpInternals.reset = function()
-    -- clear all extmarks in the namespace for the current buffer
+goUpInternals.redraw = function()
     vim.api.nvim_buf_clear_namespace(0, goUpInternals.goUpNamespace, 0, -1)
-    -- reset the extmarks
-    setUpExtmarks()
+
+    -- loop makes every line a single extmark and not one big block
+    for _ = 1, vim.api.nvim_win_get_height(0) do
+      vim.api.nvim_buf_set_extmark(0, goUpInternals.goUpNamespace, 0, 0, {
+        virt_lines = { { { '', 'NonText' } } },
+        virt_lines_above = true,
+      })
+    end
 end
 
 goUpInternals.setUpAutocommands = function()
     -- every time a buffer is entered, make sure the extmarks are set up
     vim.api.nvim_create_autocmd('BufEnter', {
         callback = function()
-            goUpInternals.reset()
+            goUpInternals.redraw()
         end,
         desc = 'set up extmarks for go-up',
     })
@@ -33,7 +27,7 @@ goUpInternals.setUpAutocommands = function()
     -- middle of the text
     vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
         callback = function()
-            goUpInternals.reset()
+            goUpInternals.redraw()
         end,
     })
 end
@@ -129,7 +123,7 @@ goUpInternals.modifySettings = function()
 end
 
 vim.api.nvim_create_user_command('GoUpReset', function()
-    goUpInternals.reset()
+    goUpInternals.redraw()
 end, { desc = 'Go-Up reset function' })
 
 vim.api.nvim_create_user_command('GoUpAlignTop', function()
