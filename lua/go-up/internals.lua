@@ -1,65 +1,47 @@
-local goUpInternals = {}
+local M = {}
 
 -- create a namespace for the extmarks for the virtual lines
-goUpInternals.goUpNamespace = vim.api.nvim_create_namespace('Go-UpNamespace')
+local ns = vim.api.nvim_create_namespace('go-up')
 
-goUpInternals.redraw = function()
-    vim.api.nvim_buf_clear_namespace(0, goUpInternals.goUpNamespace, 0, -1)
+M.redraw = function()
+    vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
 
     -- loop makes every line a single extmark and not one big block
     for _ = 1, vim.api.nvim_win_get_height(0) do
-      vim.api.nvim_buf_set_extmark(0, goUpInternals.goUpNamespace, 0, 0, {
+      vim.api.nvim_buf_set_extmark(0, ns, 0, 0, {
         virt_lines = { { { '', 'NonText' } } },
         virt_lines_above = true,
       })
     end
 end
 
-goUpInternals.setUpAutocommands = function()
-    -- every time a buffer is entered, make sure the extmarks are set up
-    vim.api.nvim_create_autocmd('BufEnter', {
-        callback = function()
-            goUpInternals.redraw()
-        end,
-        desc = 'set up extmarks for go-up',
-    })
-    -- every time the text changes, make sure the virtual lines are not in the
-    -- middle of the text
-    vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
-        callback = function()
-            goUpInternals.redraw()
-        end,
-    })
-end
-
 -- centers the screen normally, then adjusts so that the current line is
 -- actually centered
-goUpInternals.centerScreen = function()
+M.centerScreen = function()
     -- center the screen first, then adjust
     vim.cmd('normal! zz')
 
     -- get the line the cursor is on
     local currentLine = vim.fn.line('.')
+    local topLine = vim.fn.line('w0')
 
     -- get information about the current window
-    local wininfo = vim.fn.getwininfo(vim.fn.win_getid())[1]
-    local halfHeight = math.floor(wininfo.height / 2)
+    local height = vim.api.nvim_win_get_height(0)
+    local halfHeight = math.floor(height / 2)
     local targetTopLine = currentLine - halfHeight
-    local offset = wininfo.topline - targetTopLine
+    local offset = topLine - targetTopLine
 
-    -- scroll accordingly
     if offset == 0 then
         return
-    elseif offset > 0 then
-        vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
-    else
-        vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
     end
+
+    local cmd = offset > 0 and '' or ''
+    vim.cmd(([[execute "normal! %d%s"]]):format(math.abs(offset), cmd))
 end
 
 -- if the file is below the top of the window, scrolls down until line 1 is at
 -- the top
-goUpInternals.alignTop = function()
+M.alignTop = function()
     local windowID = vim.fn.win_getid()
     local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
     local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
@@ -72,7 +54,7 @@ end
 
 -- if the last line of the file is above the bottom of the window, scrolls up
 -- until the last line is at the bottom
-goUpInternals.alignBottom = function()
+M.alignBottom = function()
     local windowID = vim.fn.win_getid()
     local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
     local windowHeight = vim.fn.getwininfo(windowID)[1].height
@@ -89,7 +71,7 @@ goUpInternals.alignBottom = function()
     vim.cmd('execute "normal! ' .. math.abs(offset) .. '"')
 end
 
-goUpInternals.align = function()
+M.align = function()
     local windowID = vim.fn.win_getid()
     local lastLineNumber = vim.fn.line('$', windowID)
     local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
@@ -98,44 +80,10 @@ goUpInternals.align = function()
     local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
 
     if firstLineScreenPosition > windowScreenPosition then
-        goUpInternals.alignTop()
+        M.alignTop()
     elseif lastLineScreenPosition > 0 then
-        goUpInternals.alignBottom()
+        M.alignBottom()
     end
 end
 
-goUpInternals.setUpKeymaps = function()
-    if goUpInternals.opts.mapZZ then
-        -- adjust the scroll result when using zz to center the screen
-        vim.keymap.set('n', 'zz', function()
-            goUpInternals.centerScreen()
-        end, { desc = 'go-up screen center' })
-    end
-end
-
-goUpInternals.modifySettings = function()
-    if not goUpInternals.respectSplitkeep then
-        vim.opt.splitkeep = 'topline'
-    end
-    if not goUpInternals.respectScrolloff then
-        vim.opt.scrolloff = 0
-    end
-end
-
-vim.api.nvim_create_user_command('GoUpReset', function()
-    goUpInternals.redraw()
-end, { desc = 'Go-Up reset function' })
-
-vim.api.nvim_create_user_command('GoUpAlignTop', function()
-    goUpInternals.alignTop()
-end, { desc = 'Go-Up align top function' })
-
-vim.api.nvim_create_user_command('GoUpAlignBottom', function()
-    goUpInternals.alignBottom()
-end, { desc = 'Go-Up align bottom function' })
-
-vim.api.nvim_create_user_command('GoUpAlign', function()
-    goUpInternals.align()
-end, { desc = 'Go-Up align function' })
-
-return goUpInternals
+return M
