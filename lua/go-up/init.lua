@@ -3,7 +3,6 @@ local options = require('go-up.options')
 
 local M = {}
 
-
 local function autocmd_setup()
     -- every time the text changes, make sure the virtual lines are not in the
     -- middle of the text
@@ -15,29 +14,28 @@ local function autocmd_setup()
     })
 end
 
-
 local function keymaps_setup()
-      -- adjust the scroll result when using zz to center the screen
-      vim.keymap.set('n', 'zz', internals.centerScreen, {
-        desc = 'go-up: center screen'
-      })
+    -- adjust the scroll result when using zz to center the screen
+    vim.keymap.set('n', 'zz', internals.centerScreen, {
+        desc = 'go-up: center screen',
+    })
 end
 
 local function usercmds_setup()
     vim.api.nvim_create_user_command('GoUpReset', internals.redraw, {
-        desc = 'Go-Up reset function'
+        desc = 'Go-Up reset function',
     })
 
     vim.api.nvim_create_user_command('GoUpAlignTop', internals.alignTop, {
-        desc = 'Go-Up align top function'
+        desc = 'Go-Up align top function',
     })
 
     vim.api.nvim_create_user_command('GoUpAlignBottom', internals.alignBottom, {
-        desc = 'Go-Up align bottom function'
+        desc = 'Go-Up align bottom function',
     })
 
     vim.api.nvim_create_user_command('GoUpAlign', internals.align, {
-        desc = 'Go-Up align function'
+        desc = 'Go-Up align function',
     })
 end
 
@@ -52,7 +50,7 @@ end
 
 -- main setup function for Go-Up.nvim
 M.setup = function(opts)
-    M.opts = vim.tbl_deep_extend("keep", opts or {}, options.defaultOptions)
+    M.opts = vim.tbl_deep_extend('keep', opts or {}, options.defaultOptions)
 
     options.validateOptions(M.opts)
 
@@ -61,7 +59,7 @@ M.setup = function(opts)
 
     autocmd_setup()
     if M.opts.mapZZ then
-      keymaps_setup()
+        keymaps_setup()
     end
     usercmds_setup()
 end
