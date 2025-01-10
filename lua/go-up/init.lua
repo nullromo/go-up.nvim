@@ -11,7 +11,7 @@ M.setup = function(opts)
     options.validateOptions(M.opts)
 
     -- set up the plugin
-    setup.modifySettings()
+    setup.modifySettings(opts)
     setup.setupAutocommands()
     setup.setupKeymaps(opts)
     setup.setupUserCommands()
