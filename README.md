@@ -89,17 +89,21 @@ Go-Up provides the following functions that you can use.
     respectScrolloff = false,
     -- limit number of virtual lines. See options table
     goUpLimit = nil,
+    -- number of offset lines to use when aligning
+    alignOffsetLines = { top = 0, bottom = 0 },
 }
 ```
 
 ### Options Table
 
-| Option             | Data Type                   | Default | Description                                                                                                                                                                                                                              |
-| ------------------ | --------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mapZZ`            | boolean                     | `true`  | Go-Up remaps `zz` by default. Set `mapZZ` to `false` to prevent this.                                                                                                                                                                    |
-| `respectScrolloff` | boolean                     | `false` | Go-Up works best when `scrolloff` is set to `0`[<sup>[1]</sup>](https://github.com/nullromo/go-up.nvim/issues/3), so it does that by default. Set `respectScrolloff` to `true` to prevent Go-Up from modifying `scrolloff`.              |
-| `respectSplitkeep` | boolean                     | `false` | Go-Up works best when `splitkeep` is set to `'topline'`[<sup>[2]</sup>](https://github.com/nullromo/go-up.nvim/issues/4), so it does that by default. Set `respectSplitkeep` to `true` to prevent Go-Up from modifying `splitkeep`.      |
-| `goUpLimit`        | nil or number or `'center'` | `nil`   | By default, Go-Up will allow you to scroll up until line 1 of your buffer hits the bottom of your window. This can be limited to a number of lines, or set to `'center'` to only allow scrolling until line 1 is centered in the window. |
+| Option                    | Data Type                   | Default | Description                                                                                                                                                                                                                                  |
+| ------------------------- | --------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `mapZZ`                   | boolean                     | `true`  | Go-Up remaps `zz` by default. Set `mapZZ` to `false` to prevent this.                                                                                                                                                                        |
+| `respectScrolloff`        | boolean                     | `false` | Go-Up works best when `scrolloff` is set to `0`[<sup>[ref]</sup>](https://github.com/nullromo/go-up.nvim/issues/3), so it does that by default. Set `respectScrolloff` to `true` to prevent Go-Up from modifying `scrolloff`.                |
+| `respectSplitkeep`        | boolean                     | `false` | Go-Up works best when `splitkeep` is set to `'topline'`[<sup>[ref]</sup>](https://github.com/nullromo/go-up.nvim/issues/4), so it does that by default. Set `respectSplitkeep` to `true` to prevent Go-Up from modifying `splitkeep`.        |
+| `goUpLimit`               | nil or number or `'center'` | `nil`   | By default, Go-Up will allow you to scroll up until line 1 of your buffer hits the bottom of your window. This can be limited to a number of lines, or set to `'center'` to only allow scrolling until line 1 is centered in the window.     |
+| `alignOffsetLines.top`    | number                      | `0`     | Some other plugins may insert virtual lines to display various GUI elements[<sup>[ref]</sup>](https://github.com/nullromo/go-up.nvim/issues/5). This option can help overcome the resulting incompatibility by modifying the align behavior. |
+| `alignOffsetLines.bottom` | number                      | `0`     | See `alignOffsetLines.top`.                                                                                                                                                                                                                  |
 
 ## 📈 Other Tips
 
