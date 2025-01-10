@@ -1,3 +1,5 @@
+local options = require('go-up.options')
+
 local M = {}
 
 -- create a namespace for the extmarks for the virtual lines
@@ -7,8 +9,20 @@ M.redraw = function()
     -- clear all existing extmarks
     vim.api.nvim_buf_clear_namespace(0, goUpNamespace, 0, -1)
 
+    -- compute how many virtual lines to add
+    local totalLines = (function()
+        local windowHeight = vim.api.nvim_win_get_height(0)
+        if options.opts.goUpLimit == nil then
+            return windowHeight
+        end
+        if options.opts.goUpLimit == 'center' then
+            return math.floor(windowHeight / 2)
+        end
+        return options.opts.goUpLimit
+    end)()
+
     -- add extmark virtual lines
-    for line = 1, vim.api.nvim_win_get_height(0) do
+    for line = 1, totalLines do
         vim.api.nvim_buf_set_extmark(0, goUpNamespace, 0, 0, {
             id = line,
             virt_lines = { { { '', 'NonText' } } },

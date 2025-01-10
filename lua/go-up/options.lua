@@ -13,6 +13,8 @@ options.defaultOptions = {
     respectSplitkeep = false,
     -- respect scrolloff setting
     respectScrolloff = false,
+    -- limit number of virtual lines. See options table
+    goUpLimit = nil,
 }
 
 options.validateOptions = function(opts)
@@ -23,10 +25,30 @@ options.validateOptions = function(opts)
             checkType(value, 'opts.respectSplitkeep', 'boolean')
         elseif key == 'respectScrolloff' then
             checkType(value, 'opts.respectScrolloff', 'boolean')
+        elseif key == 'goUpLimit' then
+            if
+                value ~= nil
+                and type(value) ~= 'number'
+                and value ~= 'center'
+            then
+                error(
+                    'goUpLimit must be nil, a number, or "center" for Go-Up.nvim'
+                )
+            end
         else
             error('"opts.' .. key .. '" is not a valid option for Go-Up.nvim')
         end
     end
+end
+
+-- actual options that every file can use
+options.opts = vim.tbl_deep_extend('keep', {}, options.defaultOptions)
+
+-- sets the options after merging with defaults and validating
+options.setOptions = function(opts)
+    opts = vim.tbl_deep_extend('keep', opts or {}, options.defaultOptions)
+    options.validateOptions(opts)
+    options.opts = opts
 end
 
 return options

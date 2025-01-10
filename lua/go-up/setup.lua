@@ -1,4 +1,5 @@
 local internals = require('go-up.internals')
+local options = require('go-up.options')
 
 local M = {}
 
@@ -12,8 +13,8 @@ M.setupAutocommands = function()
     })
 end
 
-M.setupKeymaps = function(opts)
-    if opts.mapZZ then
+M.setupKeymaps = function()
+    if options.opts.mapZZ then
         -- adjust the scroll result when using zz to center the screen
         vim.keymap.set('n', 'zz', internals.centerScreen, {
             desc = 'Go-Up.nvim: center the screen',
@@ -37,11 +38,11 @@ M.setupUserCommands = function()
     })
 end
 
-M.modifySettings = function(opts)
-    if not opts.respectSplitkeep then
+M.modifySettings = function()
+    if not options.opts.respectSplitkeep then
         vim.opt.splitkeep = 'topline'
     end
-    if not opts.respectScrolloff then
+    if not options.opts.respectScrolloff then
         vim.opt.scrolloff = 0
     end
 end

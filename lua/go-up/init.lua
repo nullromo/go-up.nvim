@@ -6,15 +6,13 @@ local M = {}
 
 -- main setup function for Go-Up.nvim
 M.setup = function(opts)
-    -- merge default options into user-defined options
-    opts = vim.tbl_deep_extend('keep', opts or {}, options.defaultOptions)
-    options.validateOptions(opts)
-    M.opts = opts
+    -- set options so that other files can use them
+    options.setOptions(opts)
 
     -- set up the plugin
-    setup.modifySettings(opts)
+    setup.modifySettings()
     setup.setupAutocommands()
-    setup.setupKeymaps(opts)
+    setup.setupKeymaps()
     setup.setupUserCommands()
 end
 
