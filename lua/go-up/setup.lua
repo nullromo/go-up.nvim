@@ -6,11 +6,14 @@ local M = {}
 M.setupAutocommands = function()
     -- every time the text changes, make sure the virtual lines are not in the
     -- middle of the text
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'TextChanged', 'TextChangedI' }, {
-        callback = internals.redraw,
-        group = vim.api.nvim_create_augroup('go-up', {}),
-        desc = 'Go-Up.nvim: redraw virtual lines',
-    })
+    vim.api.nvim_create_autocmd(
+        { 'WinResized', 'BufEnter', 'TextChanged', 'TextChangedI' },
+        {
+            callback = internals.redraw,
+            group = vim.api.nvim_create_augroup('go-up', {}),
+            desc = 'Go-Up.nvim: redraw virtual lines',
+        }
+    )
 end
 
 M.setupKeymaps = function()
