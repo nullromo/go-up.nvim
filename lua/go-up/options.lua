@@ -41,8 +41,18 @@ options.validateOptions = function(opts)
             for key2, value2 in pairs(value) do
                 if key2 == 'top' then
                     checkType(value2, 'opts.alignOffsetLines.top', 'number')
+                    if value2 < 0 then
+                        error(
+                            'opts.alignOffsetLines.top must be positive for Go-Up.nvim'
+                        )
+                    end
                 elseif key2 == 'bottom' then
                     checkType(value2, 'opts.alignOffsetLines.bottom', 'number')
+                    if value2 < 0 then
+                        error(
+                            'opts.alignOffsetLines.bottom must be positive for Go-Up.nvim'
+                        )
+                    end
                 else
                     error(
                         '"opts.alignOffsetLines.'
