@@ -15,6 +15,8 @@ options.defaultOptions = {
     respectScrolloff = false,
     -- limit number of virtual lines. See options table
     goUpLimit = nil,
+    -- number of offset lines to use when aligning
+    alignOffsetLines = { top = 0, bottom = 0 },
 }
 
 options.validateOptions = function(opts)
@@ -34,6 +36,20 @@ options.validateOptions = function(opts)
                 error(
                     'goUpLimit must be nil, a number, or "center" for Go-Up.nvim'
                 )
+            end
+        elseif key == 'alignOffsetLines' then
+            for key2, value2 in pairs(value) do
+                if key2 == 'top' then
+                    checkType(value2, 'opts.alignOffsetLines.top', 'number')
+                elseif key2 == 'bottom' then
+                    checkType(value2, 'opts.alignOffsetLines.bottom', 'number')
+                else
+                    error(
+                        '"opts.alignOffsetLines.'
+                            .. key2
+                            .. '" is not a valid option for Go-Up.nvim'
+                    )
+                end
             end
         else
             error('"opts.' .. key .. '" is not a valid option for Go-Up.nvim')

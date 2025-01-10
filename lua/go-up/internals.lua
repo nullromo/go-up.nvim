@@ -66,7 +66,9 @@ M.alignTop = function()
     local windowID = vim.fn.win_getid()
     local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
     local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
-    local offset = firstLineScreenPosition - windowScreenPosition
+    local offset = firstLineScreenPosition
+        - windowScreenPosition
+        - options.opts.alignOffsetLines.top
     if offset <= 0 then
         return
     end
@@ -86,6 +88,7 @@ M.alignBottom = function()
         + windowHeight
         - lastLineScreenPosition
         - 1
+        - options.opts.alignOffsetLines.bottom
     if lastLineScreenPosition == 0 or offset <= 0 then
         return
     end
