@@ -1,14 +1,16 @@
 local M = {}
 
 -- create a namespace for the extmarks for the virtual lines
-local ns = vim.api.nvim_create_namespace('go-up')
+local goUpNamespace = vim.api.nvim_create_namespace('go-up')
 
 M.redraw = function()
-    vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+    -- clear all existing extmarks
+    vim.api.nvim_buf_clear_namespace(0, goUpNamespace, 0, -1)
 
-    -- loop makes every line a single extmark and not one big block
-    for _ = 1, vim.api.nvim_win_get_height(0) do
-        vim.api.nvim_buf_set_extmark(0, ns, 0, 0, {
+    -- add extmark virtual lines
+    for line = 1, vim.api.nvim_win_get_height(0) do
+        vim.api.nvim_buf_set_extmark(0, goUpNamespace, 0, 0, {
+            id = line,
             virt_lines = { { { '', 'NonText' } } },
             virt_lines_above = true,
         })
@@ -26,17 +28,22 @@ M.centerScreen = function()
     local topLine = vim.fn.line('w0')
 
     -- get information about the current window
-    local height = vim.api.nvim_win_get_height(0)
-    local halfHeight = math.floor(height / 2)
+    local windowHeight = vim.api.nvim_win_get_height(0)
+    local halfHeight = math.floor(windowHeight / 2)
     local targetTopLine = currentLine - halfHeight
     local offset = topLine - targetTopLine
 
+    -- if the offset is 0, do not scroll. Otherwise, the command will perform
+    -- vim's normal `0` action, which is to move the cursor to the beginning of
+    -- the line
     if offset == 0 then
         return
     end
 
-    local cmd = offset > 0 and '' or ''
-    vim.cmd(([[execute "normal! %d%s"]]):format(math.abs(offset), cmd))
+    local scrollCommand = offset > 0 and '' or ''
+    vim.cmd(
+        ([[execute "normal! %d%s"]]):format(math.abs(offset), scrollCommand)
+    )
 end
 
 -- if the file is below the top of the window, scrolls down until line 1 is at
