@@ -41,6 +41,14 @@ options.validateOptions = function(opts)
     end
 end
 
-options.opts = {}
+-- actual options that every file can use
+options.opts = vim.tbl_deep_extend('keep', {}, options.defaultOptions)
+
+-- sets the options after merging with defaults and validating
+options.setOptions = function(opts)
+    opts = vim.tbl_deep_extend('keep', opts or {}, options.defaultOptions)
+    options.validateOptions(opts)
+    options.opts = opts
+end
 
 return options
