@@ -87,6 +87,8 @@ Go-Up provides the following functions that you can use.
     respectSplitkeep = false,
     -- respect scrolloff setting
     respectScrolloff = false,
+    -- limit number of virtual lines. See options table
+    goUpLimit = nil,
 }
 ```
 
