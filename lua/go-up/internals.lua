@@ -1,4 +1,4 @@
-local goUp = require('go-up')
+local options = require('go-up.options')
 
 local M = {}
 
@@ -12,13 +12,13 @@ M.redraw = function()
     -- compute how many virtual lines to add
     local totalLines = (function()
         local windowHeight = vim.api.nvim_win_get_height(0)
-        if goUp.opts.goUpLimit == nil then
+        if options.opts.goUpLimit == nil then
             return windowHeight
         end
-        if goUp.opts.goUpLimit == 'center' then
+        if options.opts.goUpLimit == 'center' then
             return math.floor(windowHeight / 2)
         end
-        return goUp.opts.goUpLimit
+        return options.opts.goUpLimit
     end)()
 
     -- add extmark virtual lines

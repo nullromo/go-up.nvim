@@ -41,4 +41,6 @@ options.validateOptions = function(opts)
     end
 end
 
+options.opts = {}
+
 return options

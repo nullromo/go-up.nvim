@@ -9,7 +9,7 @@ M.setup = function(opts)
     -- merge default options into user-defined options
     opts = vim.tbl_deep_extend('keep', opts or {}, options.defaultOptions)
     options.validateOptions(opts)
-    M.opts = opts
+    options.opts = opts
 
     -- set up the plugin
     setup.modifySettings(opts)
