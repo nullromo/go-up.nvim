@@ -66,14 +66,14 @@ Go-Up provides the following functions that you can use.
 
 <!-- NOTE: use non-breaking hyphens in the left column of this table so that it looks OK on GitHub -->
 
-| Function                          | Description                                                                                                                     | User Command       |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `require('go‑up').setup()`        | Sets up the plugin.                                                                                                             | N/A                |
-| `require('go‑up').centerScreen()` | Centers the current line in the middle of the window. Equivalent to the default function of `zz`.                               | N/A                |
-| `require('go‑up').reset()`        | Resets the plugin for the current buffer. Works by clearing all the extmarks in the Go-Up namespace, then re-initializing them. | `:GoUpReset`       |
-| `require('go‑up').alignTop()`     | If there are virtual lines at the top of the window, scrolls down until there aren't.                                           | `:GoUpAlignTop`    |
-| `require('go‑up').alignBottom()`  | If there are virtual lines at the bottom of the window, scrolls up until there aren't.                                          | `:GoUpAlignBottom` |
-| `require('go‑up').align()`        | Calls either alignTop or alignBottom, whichever is more appropriate.                                                            | `:GoUpAlign`       |
+| Function                          | Description                                                                                                                             | User Command       |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `require('go‑up').setup()`        | Sets up the plugin.                                                                                                                     | N/A                |
+| `require('go‑up').centerScreen()` | Centers the current line in the middle of the window. Equivalent to the default function of `zz`.                                       | N/A                |
+| `require('go‑up').redraw()`       | Redraws the virtual lines for the current buffer. Works by clearing all the extmarks in the Go-Up namespace, then re-initializing them. | `:GoUpRedraw`      |
+| `require('go‑up').alignTop()`     | If there are virtual lines at the top of the window, scrolls down until there aren't.                                                   | `:GoUpAlignTop`    |
+| `require('go‑up').alignBottom()`  | If there are virtual lines at the bottom of the window, scrolls up until there aren't.                                                  | `:GoUpAlignBottom` |
+| `require('go‑up').align()`        | Calls either alignTop or alignBottom, whichever is more appropriate.                                                                    | `:GoUpAlign`       |
 
 ## 🔝 Customization
 
