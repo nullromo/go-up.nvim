@@ -7,8 +7,9 @@ local M = {}
 -- main setup function for Go-Up.nvim
 M.setup = function(opts)
     -- merge default options into user-defined options
-    M.opts = vim.tbl_deep_extend('keep', opts or {}, options.defaultOptions)
-    options.validateOptions(M.opts)
+    opts = vim.tbl_deep_extend('keep', opts or {}, options.defaultOptions)
+    options.validateOptions(opts)
+    M.opts = opts
 
     -- set up the plugin
     setup.modifySettings(opts)
