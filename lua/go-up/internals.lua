@@ -38,8 +38,8 @@ M.centerScreen = function()
     vim.cmd('normal! zz')
 
     -- get the line the cursor is on
-    local currentLine = vim.fn.line('.')
-    local topLine = vim.fn.line('w0')
+    local currentLine = vim.fn.winline()
+    local topLine = 1
 
     -- get information about the current window
     local windowHeight = vim.api.nvim_win_get_height(0)
