@@ -13,6 +13,8 @@ options.defaultOptions = {
     respectSplitkeep = false,
     -- respect scrolloff setting
     respectScrolloff = false,
+    -- respect smoothscroll setting
+    respectSmoothscroll = false,
     -- limit number of virtual lines. See options table
     goUpLimit = nil,
     -- number of offset lines to use when aligning
@@ -27,6 +29,8 @@ options.validateOptions = function(opts)
             checkType(value, 'opts.respectSplitkeep', 'boolean')
         elseif key == 'respectScrolloff' then
             checkType(value, 'opts.respectScrolloff', 'boolean')
+        elseif key == 'respectSmoothscroll' then
+            checkType(value, 'opts.respectSmoothscroll', 'boolean')
         elseif key == 'goUpLimit' then
             if
                 value ~= nil

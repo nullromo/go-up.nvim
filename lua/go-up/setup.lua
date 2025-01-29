@@ -48,6 +48,9 @@ M.modifySettings = function()
     if not options.opts.respectScrolloff then
         vim.opt.scrolloff = 0
     end
+    if not options.opts.respectSmoothscroll then
+        vim.opt.smoothscroll = true
+    end
 end
 
 return M
