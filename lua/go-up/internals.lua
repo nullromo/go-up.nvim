@@ -5,9 +5,20 @@ local M = {}
 -- create a namespace for the extmarks for the virtual lines
 local goUpNamespace = vim.api.nvim_create_namespace('go-up')
 
+-- Check if the current buffer should be ignored based on filetype
+M.shouldIgnoreBuffer = function()
+    local ft = vim.bo.filetype or ''
+    local ignored = options.opts.ignoredFiletypes or {}
+    return #ignored > 0 and vim.tbl_contains(ignored, ft)
+end
+
 M.redraw = function()
     -- clear all existing extmarks
     vim.api.nvim_buf_clear_namespace(0, goUpNamespace, 0, -1)
+
+    if M.shouldIgnoreBuffer() then
+        return
+    end
 
     -- compute how many virtual lines to add
     local totalLines = (function()
@@ -34,6 +45,11 @@ end
 -- centers the screen normally, then adjusts so that the current line is
 -- actually centered
 M.centerScreen = function()
+    if M.shouldIgnoreBuffer() then
+        vim.cmd('normal! zz')
+        return
+    end
+
     -- center the screen first, then adjust
     vim.cmd('normal! zz')
 
@@ -63,6 +79,10 @@ end
 -- if the file is below the top of the window, scrolls down until line 1 is at
 -- the top
 M.alignTop = function()
+    if M.shouldIgnoreBuffer() then
+        return
+    end
+    
     local windowID = vim.fn.win_getid()
     local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
     local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
@@ -78,6 +98,10 @@ end
 -- if the last line of the file is above the bottom of the window, scrolls up
 -- until the last line is at the bottom
 M.alignBottom = function()
+    if M.shouldIgnoreBuffer() then
+        return
+    end
+    
     local windowID = vim.fn.win_getid()
     local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
     local windowHeight = vim.fn.getwininfo(windowID)[1].height
@@ -96,6 +120,10 @@ M.alignBottom = function()
 end
 
 M.align = function()
+    if M.shouldIgnoreBuffer() then
+        return
+    end
+    
     local windowID = vim.fn.win_getid()
     local lastLineNumber = vim.fn.line('$', windowID)
     local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row

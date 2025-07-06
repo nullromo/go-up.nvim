@@ -93,6 +93,8 @@ Go-Up provides the following functions that you can use.
     goUpLimit = nil,
     -- number of offset lines to use when aligning
     alignOffsetLines = { top = 0, bottom = 0 },
+    -- list of filetypes to ignore (e.g., 'neo-tree', 'NvimTree')
+    ignoredFiletypes = {},
 }
 ```
 
@@ -104,6 +106,7 @@ Go-Up provides the following functions that you can use.
 | `respectScrolloff`        | boolean                     | `false` | Go-Up works best when `scrolloff` is set to `0`[<sup>[ref]</sup>](https://github.com/nullromo/go-up.nvim/issues/3), so it does that by default. Set `respectScrolloff` to `true` to prevent Go-Up from modifying `scrolloff`.                                                                                                                                                       |
 | `respectSplitkeep`        | boolean                     | `false` | Go-Up works best when `splitkeep` is set to `'topline'`[<sup>[ref]</sup>](https://github.com/nullromo/go-up.nvim/issues/4), so it does that by default. Set `respectSplitkeep` to `true` to prevent Go-Up from modifying `splitkeep`.                                                                                                                                               |
 | `respectSmoothscroll`     | boolean                     | `false` | Go-Up works best when `smoothscroll` is enabled[<sup>[ref]</sup>](https://github.com/nullromo/go-up.nvim/pull/16), so it enables this by default. Set `respectSmoothscroll` to `true` to prevent Go-Up from modifying `smoothscroll`.                                                                                                                                               |
+| `ignoredFiletypes`        | string[]                    | `{}`    | List of filetypes where Go-Up should be disabled. Useful for plugins like `neo-tree` or `NvimTree` where virtual lines would interfere with the UI. Ignored even when running user commands directly. Example: `ignoredFiletypes = { 'neo-tree', 'NvimTree', 'Trouble' }`                                                                                                                                                             |
 | `goUpLimit`               | nil or number or `'center'` | `nil`   | By default, Go-Up will allow you to scroll up until line 1 of your buffer hits the bottom of your window. This can be limited to a number of lines, or set to `'center'` to only allow scrolling until line 1 is centered in the window.                                                                                                                                            |
 | `alignOffsetLines.top`    | number                      | `0`     | The Go-Up align functions will scroll until this many of the virtual lines are still in view. Some other plugins may insert virtual lines to display various GUI elements[<sup>[ref]</sup>](https://github.com/nullromo/go-up.nvim/issues/5), causing the align functions to misalign. This option can help overcome the resulting incompatibility by modifying the align behavior. |
 | `alignOffsetLines.bottom` | number                      | `0`     | See `alignOffsetLines.top`.                                                                                                                                                                                                                                                                                                                                                         |
@@ -140,7 +143,7 @@ I am very open to feedback and criticism.
 
 -   🥉 [collindutter](https://github.com/collindutter)
 -   🏅
-    [`<Your name here>`](https://github.com/nullromo/go-up.nvim/blob/main/README.md#-donating)
+  [`<Your name here>`](https://github.com/nullromo/go-up.nvim/blob/main/README.md#-donating)
 
 ## ⏫ Donating
 

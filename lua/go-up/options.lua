@@ -19,6 +19,8 @@ options.defaultOptions = {
     goUpLimit = nil,
     -- number of offset lines to use when aligning
     alignOffsetLines = { top = 0, bottom = 0 },
+    -- list of filetypes to ignore
+    ignoredFiletypes = {},
 }
 
 options.validateOptions = function(opts)
@@ -40,6 +42,15 @@ options.validateOptions = function(opts)
                 error(
                     'goUpLimit must be nil, a number, or "center" for Go-Up.nvim'
                 )
+            end
+        elseif key == 'ignoredFiletypes' then
+            if type(value) ~= 'table' then
+                error('opts.ignoredFiletypes must be a table for Go-Up.nvim')
+            end
+            for _, ft in ipairs(value) do
+                if type(ft) ~= 'string' then
+                    error('all items in opts.ignoredFiletypes must be strings')
+                end
             end
         elseif key == 'alignOffsetLines' then
             for key2, value2 in pairs(value) do
