@@ -5,9 +5,9 @@ local M = {}
 -- create a namespace for the extmarks for the virtual lines
 local goUpNamespace = vim.api.nvim_create_namespace('go-up')
 
--- Check if the current buffer should be ignored based on filetype
-M.shouldIgnoreBuffer = function()
     local ft = vim.bo.filetype or ''
+-- check if the current buffer should be ignored based on filetype
+local shouldIgnoreBuffer = function()
     local ignored = options.opts.ignoredFiletypes or {}
     return #ignored > 0 and vim.tbl_contains(ignored, ft)
 end
@@ -16,7 +16,7 @@ M.redraw = function()
     -- clear all existing extmarks
     vim.api.nvim_buf_clear_namespace(0, goUpNamespace, 0, -1)
 
-    if M.shouldIgnoreBuffer() then
+    if shouldIgnoreBuffer() then
         return
     end
 
@@ -45,7 +45,7 @@ end
 -- centers the screen normally, then adjusts so that the current line is
 -- actually centered
 M.centerScreen = function()
-    if M.shouldIgnoreBuffer() then
+    if shouldIgnoreBuffer() then
         vim.cmd('normal! zz')
         return
     end
@@ -79,7 +79,7 @@ end
 -- if the file is below the top of the window, scrolls down until line 1 is at
 -- the top
 M.alignTop = function()
-    if M.shouldIgnoreBuffer() then
+    if shouldIgnoreBuffer() then
         return
     end
 
@@ -98,7 +98,7 @@ end
 -- if the last line of the file is above the bottom of the window, scrolls up
 -- until the last line is at the bottom
 M.alignBottom = function()
-    if M.shouldIgnoreBuffer() then
+    if shouldIgnoreBuffer() then
         return
     end
 
@@ -120,7 +120,7 @@ M.alignBottom = function()
 end
 
 M.align = function()
-    if M.shouldIgnoreBuffer() then
+    if shouldIgnoreBuffer() then
         return
     end
 
