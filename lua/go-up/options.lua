@@ -49,7 +49,9 @@ options.validateOptions = function(opts)
             end
             for _, ft in ipairs(value) do
                 if type(ft) ~= 'string' then
-                    error('all items in opts.ignoredFiletypes must be strings')
+                    error(
+                        'all items in opts.ignoredFiletypes must be strings for Go-Up.nvim'
+                    )
                 end
             end
         elseif key == 'alignOffsetLines' then
