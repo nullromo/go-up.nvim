@@ -82,7 +82,7 @@ M.alignTop = function()
     if M.shouldIgnoreBuffer() then
         return
     end
-    
+
     local windowID = vim.fn.win_getid()
     local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
     local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
@@ -101,7 +101,7 @@ M.alignBottom = function()
     if M.shouldIgnoreBuffer() then
         return
     end
-    
+
     local windowID = vim.fn.win_getid()
     local windowScreenPosition = vim.fn.win_screenpos(windowID)[1]
     local windowHeight = vim.fn.getwininfo(windowID)[1].height
@@ -123,7 +123,7 @@ M.align = function()
     if M.shouldIgnoreBuffer() then
         return
     end
-    
+
     local windowID = vim.fn.win_getid()
     local lastLineNumber = vim.fn.line('$', windowID)
     local firstLineScreenPosition = vim.fn.screenpos(windowID, 1, 1).row
