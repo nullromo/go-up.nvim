@@ -5,11 +5,10 @@ local M = {}
 -- create a namespace for the extmarks for the virtual lines
 local goUpNamespace = vim.api.nvim_create_namespace('go-up')
 
-    local ft = vim.bo.filetype or ''
 -- check if the current buffer should be ignored based on filetype
 local shouldIgnoreBuffer = function()
     local ignored = options.opts.ignoredFiletypes or {}
-    return #ignored > 0 and vim.tbl_contains(ignored, ft)
+    return #ignored > 0 and vim.tbl_contains(ignored, vim.bo.filetype or '')
 end
 
 M.redraw = function()
@@ -45,13 +44,12 @@ end
 -- centers the screen normally, then adjusts so that the current line is
 -- actually centered
 M.centerScreen = function()
-    if shouldIgnoreBuffer() then
-        vim.cmd('normal! zz')
-        return
-    end
-
     -- center the screen first, then adjust
     vim.cmd('normal! zz')
+
+    if shouldIgnoreBuffer() then
+        return
+    end
 
     -- get the line the cursor is on
     local currentLine = vim.fn.winline()
